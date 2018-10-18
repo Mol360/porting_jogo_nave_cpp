@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include "Mol/InputManager.h"
-#include "Mol/Nave/PlayerShip.h"
 #include "Mol/GameController.h"
 
 using namespace std;

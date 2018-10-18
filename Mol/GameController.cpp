@@ -18,7 +18,7 @@ void GameController::load(){
 	this->window_width = 640;
 	this->window_height = 480;
 
-  	this->screen = SDL_SetVideoMode(this->window_width, 480, 16, SDL_SWSURFACE); // Cria a janela
+  	this->screen = SDL_SetVideoMode(this->window_width, this->window_height, 16, SDL_SWSURFACE); // Cria a janela
 
 	this->input.load();
 

@@ -6,7 +6,7 @@
 class PlayerShip: public SpaceShip{
 
 	private:
-                InputManager input;
+        InputManager input;
 		void controlMovement();
 	public:
 		void load();
