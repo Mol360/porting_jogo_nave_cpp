@@ -2,8 +2,8 @@
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include "Mol/InputManager.h"
-#include "Mol/Nave/PlayerShip.h"
+#include "InputManager.h"
+#include "Nave/PlayerShip.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -16,7 +16,7 @@ class GameController{
 		string game_name;
 		SDL_Surface * screen;
 		PlayerShip player;
-		InputManager * input;
+		InputManager input;
 	protected:
 
 	public:
