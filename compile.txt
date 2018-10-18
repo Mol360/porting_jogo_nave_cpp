@@ -1,0 +1,2 @@
+g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp -o game -lSDL -lSDL_image
+
