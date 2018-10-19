@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 
-	cout << "Teste" << endl;
+	cout << "Teste ::" << GameController::getWindowWidth() << "x" << GameController::getWindowHeight() << endl;
 
 	GameController game_controller;
 	game_controller.load();

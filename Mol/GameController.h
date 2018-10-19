@@ -11,8 +11,8 @@ using namespace std;
 
 class GameController{
 	private:
-		int window_width;
-		int window_height;
+		static int window_width;
+		static int window_height;
 		string game_name;
 		SDL_Surface * screen;
 		PlayerShip player;
@@ -20,8 +20,8 @@ class GameController{
 	protected:
 
 	public:
-		int getWindowWidth();
-		int getWindowHeight();
+		static int getWindowWidth();
+		static int getWindowHeight();
 		string getGameName();
 		SDL_Surface getScreen();
 		InputManager getInputManager();

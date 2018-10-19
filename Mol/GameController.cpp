@@ -1,11 +1,14 @@
 #include "GameController.h"
 
+int GameController::window_width = 640;
+int GameController::window_height = 480;
+
 int GameController::getWindowWidth(){
-	return this->window_width;
+	return window_width;
 }
 
 int GameController::getWindowHeight(){
-	return this->window_height;
+	return window_height;
 }
 
 string GameController::getGameName(){
@@ -15,10 +18,7 @@ string GameController::getGameName(){
 void GameController::load(){
 	SDL_Init(SDL_INIT_VIDEO); // Inicializa o SDL e o sistema de vídeo
 
-	this->window_width = 640;
-	this->window_height = 480;
-
-  	this->screen = SDL_SetVideoMode(this->window_width, this->window_height, 16, SDL_SWSURFACE); // Cria a janela
+  	this->screen = SDL_SetVideoMode(window_width, window_height, 16, SDL_SWSURFACE); // Cria a janela
 
 	this->input.load();
 

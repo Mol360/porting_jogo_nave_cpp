@@ -1,4 +1,5 @@
 #include "PlayerShip.h"
+#include "../GameController.h"
 
 using namespace std;
 
@@ -20,20 +21,20 @@ void PlayerShip::controlMovement(){
 	int velX = 0;
         int velY = 0;
 
-        if(this->input.isPressRight() == true){
+        if(this->input.isPressRight() == true && this->getPosX() < GameController::getWindowWidth()){
 	        cout << "Pressionado Right" << endl;
                 velX = 5;
         }
-        if(this->input.isPressLeft() == true){
+        if(this->input.isPressLeft() == true && this->getPosX() > 0){
                 cout << "Pressionado Left" << endl;
                 velX = -5;
         }
                         
-        if(this->input.isPressDown() == true){
+        if(this->input.isPressDown() == true && this->getPosY() < GameController::getWindowHeight()){
         	cout << "Pressionado Down" << endl;
                 velY = 5;
         }
-        if(this->input.isPressUp() == true){
+        if(this->input.isPressUp() == true && this->getPosY() > 0){
         	cout << "Pressionado Up" << endl;
                 velY = -5;
         }
