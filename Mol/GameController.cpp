@@ -20,10 +20,12 @@ void GameController::load(){
 
   	this->screen = SDL_SetVideoMode(window_width, window_height, 16, SDL_SWSURFACE); // Cria a janela
 
+  	this->input = InputManager();
 	this->input.load();
 
 	this->player.setScreen(this->screen);
 	this->player.load();
+	this->player.setInputManager(&this->input);
 }
 
 void GameController::draw(){
@@ -39,7 +41,6 @@ void GameController::update(){
 	this->input.update();
 
 	if(this->input.isPressClose() == false){
-		this->player.setInputManager(this->input);
 		this->player.update();
 	}
 	
@@ -60,4 +61,8 @@ bool GameController::isPressClose(){
 
 void GameController::quit(){
 	SDL_Quit(); // Fecha o SDL
+}
+
+InputManager GameController::getInputManager(){
+	return this->input;
 }

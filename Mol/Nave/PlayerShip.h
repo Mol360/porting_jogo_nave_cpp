@@ -6,10 +6,10 @@
 class PlayerShip: public SpaceShip{
 
 	private:
-        InputManager input;
+        InputManager* input;
 		void controlMovement();
 	public:
 		void load();
 		void update();
-		void setInputManager(InputManager n_input);
+		void setInputManager(InputManager* n_input);
 };
