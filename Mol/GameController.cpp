@@ -34,7 +34,7 @@ void GameController::draw(){
 	this->player.draw();
 
 	SDL_UpdateRect(this->screen, 0,0,0,0); // Atualiza todo o screen
-	SDL_Delay(30); // Espera 60 milissegundos
+	SDL_Delay(15); // Espera 60 milissegundos
 }
 
 void GameController::update(){

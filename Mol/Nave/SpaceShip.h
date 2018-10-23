@@ -20,6 +20,8 @@ class SpaceShip{
 	public:
 		int getPosX();
 		int getPosY();
+		int getWidth();
+		int getHeight();
 		void setPosX(int n_pos_x);
 		void setPosY(int n_pos_y);
 		void setVelX(int n_vel_x);

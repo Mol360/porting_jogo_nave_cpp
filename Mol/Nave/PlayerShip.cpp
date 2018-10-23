@@ -22,22 +22,30 @@ void PlayerShip::controlMovement(){
         int velY = 0;
         int space_ship_vel = 5;
 
-        if(this->input->isPressRight() == true && this->getPosX() < GameController::getWindowWidth()){
+        if(this->input->isPressRight() == true && this->getPosX() < (GameController::getWindowWidth() - this->getWidth())){
 	        cout << "Pressionado Right" << endl;
                 velX = space_ship_vel;
+
+                cout << "Pos " << this->getPosX() << "x" << this->getPosY() << endl;
         }
         if(this->input->isPressLeft() == true && this->getPosX() > 0){
                 cout << "Pressionado Left" << endl;
                 velX = -space_ship_vel;
+
+                cout << "Pos " << this->getPosX() << "x" << this->getPosY() << endl;
         }
                         
-        if(this->input->isPressDown() == true && this->getPosY() < GameController::getWindowHeight()){
+        if(this->input->isPressDown() == true && this->getPosY() < (GameController::getWindowHeight() - this->getHeight())){
         	cout << "Pressionado Down" << endl;
                 velY = space_ship_vel;
+
+                cout << "Pos " << this->getPosX() << "x" << this->getPosY() << endl;
         }
         if(this->input->isPressUp() == true && this->getPosY() > 0){
         	cout << "Pressionado Up" << endl;
                 velY = -space_ship_vel;
+
+                cout << "Pos " << this->getPosX() << "x" << this->getPosY() << endl;
         }
 
 	this->moveX(velX);

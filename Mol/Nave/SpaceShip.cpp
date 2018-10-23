@@ -90,3 +90,11 @@ void SpaceShip::setVelY(int n_vel_y){
 void SpaceShip::setVelX(int n_vel_x){
 	vel_x = n_vel_x;
 }
+
+int SpaceShip::getHeight(){
+	return ship_obj->h;
+}
+
+int SpaceShip::getWidth(){
+	return ship_obj->w;
+}
