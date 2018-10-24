@@ -34,7 +34,9 @@ void GameController::draw(){
 	this->player.draw();
 
 	SDL_UpdateRect(this->screen, 0,0,0,0); // Atualiza todo o screen
-	SDL_Delay(10); // 16.6
+	//SDL_Delay(10); // 16.6
+	int tempo_inicial = SDL_GetTicks();
+	this->controlaFps(tempo_inicial);
 }
 
 void GameController::update(){
@@ -65,4 +67,13 @@ void GameController::quit(){
 
 InputManager GameController::getInputManager(){
 	return this->input;
+}
+
+void GameController::controlaFps ( int tempo_inicial ){
+	int fps = 10; // converte 60 FPS para milissegundos
+	int tempo_agora = SDL_GetTicks() - tempo_inicial;
+
+	if(tempo_agora < fps){
+		SDL_Delay(fps - tempo_agora);
+	}
 }

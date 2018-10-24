@@ -31,4 +31,5 @@ class GameController{
 		void update();
 		bool isPressClose();
 		void quit();
+		void controlaFps(int tempo_inicial);
 };
