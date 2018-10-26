@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include "InputManager.h"
+#include "BackgroundController.h"
 #include "Nave/PlayerShip.h"
 #include <iostream>
 #include <stdio.h>
@@ -14,6 +15,7 @@ class GameController{
 		static int window_width;
 		static int window_height;
 		string game_name;
+		BackgroundController background_controller;
 		SDL_Surface * screen;
 		PlayerShip player;
 		InputManager input;

@@ -23,6 +23,10 @@ void GameController::load(){
   	this->input = InputManager();
 	this->input.load();
 
+	this->background_controller = BackgroundController();
+	this->background_controller.setScreen(this->screen);
+	this->background_controller.load();
+
 	this->player.setScreen(this->screen);
 	this->player.load();
 	this->player.setInputManager(&this->input);
@@ -31,6 +35,7 @@ void GameController::load(){
 void GameController::draw(){
 	SDL_FillRect(this->screen, NULL, 0x0); // Pinta todo o screen de preto
 
+	this->background_controller.draw();
 	this->player.draw();
 
 	SDL_UpdateRect(this->screen, 0,0,0,0); // Atualiza todo o screen
@@ -43,6 +48,7 @@ void GameController::update(){
 	this->input.update();
 
 	if(this->input.isPressClose() == false){
+		this->background_controller.update();
 		this->player.update();
 	}
 	
