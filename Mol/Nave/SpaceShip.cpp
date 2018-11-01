@@ -98,3 +98,7 @@ int SpaceShip::getHeight(){
 int SpaceShip::getWidth(){
 	return this->ship_obj->w;
 }
+
+void SpaceShip::addEnemy(SpaceShip *n_enemy){
+	this->enemies.push_back(n_enemy);
+}

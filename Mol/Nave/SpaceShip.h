@@ -2,6 +2,7 @@
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <vector>
 
 class SpaceShip{
 
@@ -10,6 +11,7 @@ class SpaceShip{
 		SDL_Surface * screen; // A janela principal
 		std::string ship_name;
 		std::string ship_image;
+		std::vector<SpaceShip *> enemies;
 		int pos_x;
 		int pos_y;
 		int vel_x;
@@ -40,5 +42,6 @@ class SpaceShip{
 		void update();
 		void draw();
 		void load();
+		void addEnemy(SpaceShip *n_enemy);
 
 };

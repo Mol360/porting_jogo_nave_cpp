@@ -5,6 +5,8 @@
 #include "InputManager.h"
 #include "BackgroundController.h"
 #include "Nave/PlayerShip.h"
+#include "Nave/EnemyShipRed.h"
+#include "ObjectBase.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -18,6 +20,8 @@ class GameController{
 		BackgroundController background_controller;
 		SDL_Surface * screen;
 		PlayerShip player;
+		EnemyShipRed enemy;
+		ObjectBase tiro_t;
 		InputManager input;
 	protected:
 
