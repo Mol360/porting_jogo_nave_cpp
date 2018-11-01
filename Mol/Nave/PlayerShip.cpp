@@ -6,7 +6,8 @@ using namespace std;
 void PlayerShip::load(){
 	this->setShipName("Player");
 	this->setImageShip("nave_player.png");
-	SpaceShip::load();
+        SpaceShip::load();
+        this->bullet_vel = -10;
 }
 
 void PlayerShip::setInputManager(InputManager* n_input){
@@ -15,6 +16,7 @@ void PlayerShip::setInputManager(InputManager* n_input){
 
 void PlayerShip::update(){
 	this->controlMovement();
+        SpaceShip::update();
 }
 
 void PlayerShip::controlMovement(){
@@ -46,6 +48,10 @@ void PlayerShip::controlMovement(){
                 velY = -space_ship_vel;
 
                 cout << "Pos " << this->getPosX() << "x" << this->getPosY() << endl;
+        }
+
+        if(this->input->isPressSpacebar() == true){
+                this->shoot();
         }
 
 	this->moveX(velX);

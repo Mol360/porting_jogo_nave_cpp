@@ -16,12 +16,17 @@ bool InputManager::isPressDown(){
         return is_down_press;
 }
 
+bool InputManager::isPressSpacebar(){
+        return is_spacebar_press;
+}
+
 void InputManager::load(){
 	is_right_press = false;
 	is_left_press = false;
 	is_up_press = false;
 	is_down_press = false;
 	is_close_press = false;
+  is_spacebar_press = false;
 }
 
 void InputManager::update(){
@@ -36,19 +41,22 @@ void InputManager::update(){
           		switch (event.key.keysym.sym)
           		{
             			case SDLK_UP:
-              				is_up_press = true;
-              				break;
+            				is_up_press = true;
+            				break;
             			case SDLK_DOWN:
-              				is_down_press = true;
-              				break;
+            				is_down_press = true;
+            				break;
             			case SDLK_RIGHT:
 			              is_right_press = true;
 			              break;
-			        case SDLK_LEFT:
+    			        case SDLK_LEFT:
 			              is_left_press = true;
 			              break;
-			        default:
-              				break;
+                  case SDLK_SPACE:
+                    is_spacebar_press = true;
+                    break;
+    			        default:
+                  				break;
           		}
         	}
         	if (event.type == SDL_KEYUP) // Se o usuário soltou um botão do teclado
@@ -58,7 +66,7 @@ void InputManager::update(){
           		{
 		            case SDLK_UP:
               			is_up_press = false;
-			        break;
+			              break;
 		            case SDLK_DOWN:
               			is_down_press = false;
               			break;
@@ -68,6 +76,9 @@ void InputManager::update(){
 		            case SDLK_LEFT:
               			is_left_press = false;
 		              	break;
+                case SDLK_SPACE:
+                    is_spacebar_press = false;
+                    break;
 		           default:
               			break;
           		}

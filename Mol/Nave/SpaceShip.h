@@ -9,6 +9,9 @@ class SpaceShip: public ObjectBase{
 
 	protected:
 		std::vector<SpaceShip *> enemies;
+		int max_num_of_shots;
+		int bullet_vel;
+		std::vector<ObjectBase> arr_bullets;
 		int vel_x;
 		int vel_y;
 		int life;
@@ -24,8 +27,10 @@ class SpaceShip: public ObjectBase{
 		void setLife(int n_tot_life);
 		void setShotValue(int n_shot_value);
 		int gotShot();
+		void shoot();
 		void update();
 		void load();
+		void draw();
 		void addEnemy(SpaceShip *n_enemy);
 
 };

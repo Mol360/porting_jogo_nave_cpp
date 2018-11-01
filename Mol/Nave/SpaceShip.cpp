@@ -1,4 +1,5 @@
 #include "SpaceShip.h"
+#include "../GameController.h"
 
 void SpaceShip::setShipName(std::string n_ship_name){
 	this->object_name = n_ship_name;
@@ -30,6 +31,8 @@ void SpaceShip::load(){
 		this->object_image = "nave_player.png";
 	}
 	ObjectBase::load();
+	this->max_num_of_shots = 5;
+	this->bullet_vel = 10;
 	this->life = 100;
 	this->shot_value = 20;
 	this->object_name = "Nave";
@@ -46,8 +49,48 @@ void SpaceShip::setImageShip(std::string n_ship_image){
 	this->object_image = n_ship_image;
 }
 
+void SpaceShip::shoot(){
+	if(this->arr_bullets.size() < this->max_num_of_shots){
+		ObjectBase tiro_t = ObjectBase();
+		tiro_t.setScreen(this->screen);
+		tiro_t.load();
+
+		int n_pos_x = this->getPosX()+(this->getWidth()/2);
+		int n_pos_y = this->getPosY();
+
+		tiro_t.setPosX(n_pos_x);
+		if(this->bullet_vel > 0){
+			n_pos_y = this->getPosY()+this->getHeight();
+		}
+		tiro_t.setPosY(n_pos_y);
+
+		this->arr_bullets.push_back(tiro_t);
+	}
+}
+
 void SpaceShip::update(){
-	
+	if(this->arr_bullets.size() > 0){
+		for (unsigned i=0; i<this->arr_bullets.size(); ++i){
+			ObjectBase& tmp_bullet = arr_bullets[i];
+			if(tmp_bullet.getPosY() > GameController::getWindowHeight() || tmp_bullet.getPosY() <= 0){
+				arr_bullets.erase(arr_bullets.begin()+i);
+			}else{
+				tmp_bullet.moveY(this->bullet_vel);
+				tmp_bullet.update();
+			}
+		}
+	}
+}
+
+void SpaceShip::draw(){
+	ObjectBase::draw();
+
+	if(this->arr_bullets.size() > 0){
+		for (unsigned i=0; i < this->arr_bullets.size(); ++i){
+			ObjectBase& tmp_bullet = arr_bullets[i];
+			tmp_bullet.draw();
+		}
+	}
 }
 
 void SpaceShip::setVelY(int n_vel_y){
