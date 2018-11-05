@@ -4,9 +4,11 @@
 #include <SDL/SDL_image.h>
 #include <vector>
 #include "../ObjectBase.h"
+#include <time.h>
 
 class SpaceShip: public ObjectBase{
-
+	private:
+		void validateShootDelay();
 	protected:
 		std::vector<SpaceShip *> enemies;
 		int max_num_of_shots;
@@ -16,6 +18,9 @@ class SpaceShip: public ObjectBase{
 		int vel_y;
 		int life;
 		int shot_value;
+		Uint64 shoot_delay_timer;
+		bool can_shoot;
+		int delay_shoot_miliseconds;
 	public:
 		void setVelX(int n_vel_x);
 		void setVelY(int n_vel_y);
