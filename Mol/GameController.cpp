@@ -33,9 +33,6 @@ void GameController::load(){
 
 	this->enemy.setScreen(this->screen);
 	this->enemy.load();
-
-	this->tiro_t.setScreen(this->screen);
-	this->tiro_t.load();
 }
 
 void GameController::draw(){
@@ -45,7 +42,6 @@ void GameController::draw(){
 	this->player.draw();
 
 	this->enemy.draw();
-	this->tiro_t.draw();
 
 	SDL_UpdateRect(this->screen, 0,0,0,0); // Atualiza todo o screen
 	//SDL_Delay(10); // 16.6
@@ -60,8 +56,7 @@ void GameController::update(){
 		this->background_controller.update();
 		this->player.update();
 		this->enemy.update();
-		this->tiro_t.update();
-		this->tiro_t.moveY(5);
+		this->enemy.shoot();
 	}
 	
 	this->draw();
