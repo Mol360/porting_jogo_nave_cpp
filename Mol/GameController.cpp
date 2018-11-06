@@ -22,6 +22,7 @@ void GameController::load(){
 
   	this->input = InputManager();
 	this->input.load();
+	this->game_name = "Jogo Nave";
 
 	this->background_controller = BackgroundController();
 	this->background_controller.setScreen(this->screen);
@@ -56,7 +57,7 @@ void GameController::draw(){
 }
 
 void GameController::update(){
-	SDL_WM_SetCaption("Jogo Nave", NULL);
+	SDL_WM_SetCaption(this->game_name.c_str(), NULL);
 	this->input.update();
 
 	if(this->input.isPressClose() == false){
