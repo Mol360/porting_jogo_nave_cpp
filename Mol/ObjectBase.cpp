@@ -93,8 +93,16 @@ bool ObjectBase::collided(ObjectBase other_object){
 		if(this->getPosY() >= other_object.getPosY() && this->getPosY() <= (other_object.getPosY() + other_object.getHeight())){
 			collided = true;
 		}
+	}else if((this->getPosX()+this->getWidth()) >= other_object.getPosX() && (this->getPosX()+this->getWidth()) <= (other_object.getPosX() + other_object.getWidth())){
+		if((this->getPosY()+this->getHeight()) >= other_object.getPosY() && (this->getPosY()+this->getHeight()) <= (other_object.getPosY() + other_object.getHeight())){
+			collided = true;
+		}
 	}else if(other_object.getPosX() >= this->getPosX() && other_object.getPosX() <= (this->getPosX() + this->getWidth())){
 		if(other_object.getPosY() >= this->getPosY() && other_object.getPosY() <= (this->getPosY() + this->getHeight())){
+			collided = true;
+		}
+	}else if((other_object.getPosX()+other_object.getWidth()) >= this->getPosX() && (other_object.getPosX()+other_object.getWidth()) <= (this->getPosX() + this->getWidth())){
+		if((other_object.getPosY()+other_object.getHeight()) >= this->getPosY() && (other_object.getPosY()+other_object.getHeight()) <= (this->getPosY() + this->getHeight())){
 			collided = true;
 		}
 	}

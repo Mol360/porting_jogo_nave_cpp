@@ -23,6 +23,8 @@ void GameController::load(){
   	this->input = InputManager();
 	this->input.load();
 	this->game_name = "Jogo Nave";
+	this->enemy_qtt_col = 10;
+	this->enemy_qtt_row = 4;
 
 	this->background_controller = BackgroundController();
 	this->background_controller.setScreen(this->screen);
@@ -40,6 +42,45 @@ void GameController::load(){
 	this->enemy.addEnemy(&this->player);
 
 	this->player.setPosX(300);
+
+	int off_set_top = 50;
+	int off_set_left = 50;
+
+	if(this->enemies.size() <= 0){
+		for (unsigned i=0; i<this->enemy_qtt_col; ++i){
+			std::vector<SpaceShip> n_enemy_vec;
+			for (unsigned b=0; b<this->enemy_qtt_row; ++b){
+				int n_pos_x = (off_set_left*(i+1))+10;
+				int n_pos_y = (off_set_top*(b)+1)+10;
+				if(i%2){
+					EnemyShipRed n_enemy = EnemyShipRed();
+					n_enemy.setScreen(this->screen);
+					n_enemy.load();
+					n_enemy.setPosX(n_pos_x);
+					n_enemy.setPosY(n_pos_y);
+					n_enemy.addEnemy(&this->player);
+					n_enemy_vec.push_back(n_enemy);
+				}else{
+					EnemyShipBlue n_enemy = EnemyShipBlue();
+					n_enemy.setScreen(this->screen);
+					n_enemy.load();
+					n_enemy.setPosX(n_pos_x);
+					n_enemy.setPosY(n_pos_y);
+					n_enemy.addEnemy(&this->player);
+					n_enemy_vec.push_back(n_enemy);
+				}
+			}
+			this->enemies.push_back(n_enemy_vec);
+		}
+
+		if(this->enemies.size() > 0){
+			for (unsigned i=0; i<this->enemies.size(); ++i){
+				for (unsigned b=0; b<this->enemies[i].size(); ++b){
+					this->player.addEnemy(&this->enemies[i][b]);
+				}
+			}
+		}
+	}
 }
 
 void GameController::draw(){
@@ -49,6 +90,14 @@ void GameController::draw(){
 	this->player.draw();
 
 	this->enemy.draw();
+
+	if(this->enemies.size() > 0){
+		for (unsigned i=0; i<this->enemies.size(); ++i){
+			for (unsigned b=0; b<this->enemies[i].size(); ++b){
+				this->enemies[i][b].draw();
+			}
+		}
+	}
 
 	SDL_UpdateRect(this->screen, 0,0,0,0); // Atualiza todo o screen
 	//SDL_Delay(10); // 16.6
@@ -65,6 +114,14 @@ void GameController::update(){
 		this->player.update();
 		this->enemy.update();
 		this->enemy.shoot();
+
+		if(this->enemies.size() > 0){
+			for (unsigned i=0; i<this->enemies.size(); ++i){
+				for (unsigned b=0; b<this->enemies[i].size(); ++b){
+					this->enemies[i][b].update();
+				}
+			}
+		}
 	}
 	
 	this->draw();

@@ -136,9 +136,11 @@ void SpaceShip::updateShotEnemies(ObjectBase& tmp_bullet,unsigned int bullet_ind
 	if(this->enemies.size() > 0){
 		for (unsigned i=0; i < this->enemies.size(); ++i){
 			SpaceShip* enemy = this->enemies[i];
-			if(enemy->collided(tmp_bullet) == true){
-				this->arr_bullets.erase(this->arr_bullets.begin()+bullet_index);
-				enemy->gotShot();
+			if(enemy->isDead() == false){
+				if(enemy->collided(tmp_bullet) == true){
+					this->arr_bullets.erase(this->arr_bullets.begin()+bullet_index);
+					enemy->gotShot();
+				}	
 			}
 		}
 	}

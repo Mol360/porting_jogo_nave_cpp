@@ -6,6 +6,8 @@
 #include "BackgroundController.h"
 #include "Nave/PlayerShip.h"
 #include "Nave/EnemyShipRed.h"
+#include "Nave/EnemyShipBlue.h"
+#include "Nave/SpaceShip.h"
 #include "ObjectBase.h"
 #include <iostream>
 #include <stdio.h>
@@ -16,6 +18,9 @@ class GameController{
 	private:
 		static int window_width;
 		static int window_height;
+		std::vector<std::vector<SpaceShip>> enemies;
+		int enemy_qtt_col;
+		int enemy_qtt_row;
 		string game_name;
 		BackgroundController background_controller;
 		SDL_Surface * screen;
