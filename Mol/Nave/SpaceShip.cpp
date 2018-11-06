@@ -24,6 +24,9 @@ void SpaceShip::setShotValue(int n_shot_value){
 
 int SpaceShip::gotShot(){
 	this->life = this->life - this->shot_value;
+	if(this->life <= 0){
+		this->die();
+	}
 }
 
 void SpaceShip::load(){
@@ -108,7 +111,7 @@ void SpaceShip::draw(){
 	if(this->isDead() == false){
 		ObjectBase::draw();
 	}
-	
+
 	if(this->arr_bullets.size() > 0){
 		for (unsigned i=0; i < this->arr_bullets.size(); ++i){
 			ObjectBase& tmp_bullet = arr_bullets[i];
@@ -135,7 +138,7 @@ void SpaceShip::updateShotEnemies(ObjectBase& tmp_bullet,unsigned int bullet_ind
 			SpaceShip* enemy = this->enemies[i];
 			if(enemy->collided(tmp_bullet) == true){
 				this->arr_bullets.erase(this->arr_bullets.begin()+bullet_index);
-				enemy->die();
+				enemy->gotShot();
 			}
 		}
 	}

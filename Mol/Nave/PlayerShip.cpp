@@ -8,6 +8,7 @@ void PlayerShip::load(){
 	this->setImageShip("nave_player.png");
         SpaceShip::load();
         this->bullet_vel = -10;
+        this->shot_value = 20;
 }
 
 void PlayerShip::setInputManager(InputManager* n_input){
