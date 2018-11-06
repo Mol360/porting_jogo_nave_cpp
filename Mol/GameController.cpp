@@ -33,6 +33,12 @@ void GameController::load(){
 
 	this->enemy.setScreen(this->screen);
 	this->enemy.load();
+
+	this->player.addEnemy(&this->enemy);
+
+	this->enemy.addEnemy(&this->player);
+
+	this->player.setPosX(300);
 }
 
 void GameController::draw(){
@@ -50,6 +56,7 @@ void GameController::draw(){
 }
 
 void GameController::update(){
+	SDL_WM_SetCaption("Jogo Nave", NULL);
 	this->input.update();
 
 	if(this->input.isPressClose() == false){

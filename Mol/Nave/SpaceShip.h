@@ -21,6 +21,7 @@ class SpaceShip: public ObjectBase{
 		Uint64 shoot_delay_timer;
 		bool can_shoot;
 		int delay_shoot_miliseconds;
+		void updateShotEnemies(ObjectBase& tmp_bullet, unsigned int bullet_index);
 	public:
 		void setVelX(int n_vel_x);
 		void setVelY(int n_vel_y);

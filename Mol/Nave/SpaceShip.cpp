@@ -53,7 +53,7 @@ void SpaceShip::setImageShip(std::string n_ship_image){
 }
 
 void SpaceShip::shoot(){
-	if(this->can_shoot == true){
+	if(this->can_shoot == true && this->isDead() == false){
 		if(this->arr_bullets.size() < this->max_num_of_shots){
 			this->can_shoot = false;
 			this->shoot_delay_timer = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -76,15 +76,16 @@ void SpaceShip::shoot(){
 }
 
 void SpaceShip::update(){
-
-	this->validateShootDelay();
-
+	if(this->isDead() == false){
+		this->validateShootDelay();
+	}
 	if(this->arr_bullets.size() > 0){
 		for (unsigned i=0; i<this->arr_bullets.size(); ++i){
 			ObjectBase& tmp_bullet = arr_bullets[i];
 			if(tmp_bullet.getPosY() > GameController::getWindowHeight() || tmp_bullet.getPosY() <= 0){
 				arr_bullets.erase(arr_bullets.begin()+i);
 			}else{
+				this->updateShotEnemies(tmp_bullet,i);
 				tmp_bullet.moveY(this->bullet_vel);
 				tmp_bullet.update();
 			}
@@ -104,8 +105,10 @@ void SpaceShip::validateShootDelay(){
 }
 
 void SpaceShip::draw(){
-	ObjectBase::draw();
-
+	if(this->isDead() == false){
+		ObjectBase::draw();
+	}
+	
 	if(this->arr_bullets.size() > 0){
 		for (unsigned i=0; i < this->arr_bullets.size(); ++i){
 			ObjectBase& tmp_bullet = arr_bullets[i];
@@ -124,4 +127,16 @@ void SpaceShip::setVelX(int n_vel_x){
 
 void SpaceShip::addEnemy(SpaceShip *n_enemy){
 	this->enemies.push_back(n_enemy);
+}
+
+void SpaceShip::updateShotEnemies(ObjectBase& tmp_bullet,unsigned int bullet_index){
+	if(this->enemies.size() > 0){
+		for (unsigned i=0; i < this->enemies.size(); ++i){
+			SpaceShip* enemy = this->enemies[i];
+			if(enemy->collided(tmp_bullet) == true){
+				this->arr_bullets.erase(this->arr_bullets.begin()+bullet_index);
+				enemy->die();
+			}
+		}
+	}
 }

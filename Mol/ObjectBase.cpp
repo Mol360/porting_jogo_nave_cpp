@@ -17,6 +17,7 @@ void ObjectBase::load(){
 	this->object_name = "Base Object";
 	this->dest = {0,0,0,0}; // Destino da imagem no screen
 	this->is_visible = true;
+	this->is_dead = false;
 }
 
 std::string ObjectBase::getImageObj(){
@@ -83,4 +84,34 @@ void ObjectBase::show(){
 
 bool ObjectBase::isVisible(){
 	return this->is_visible;
+}
+
+bool ObjectBase::collided(ObjectBase other_object){
+	bool collided = false;
+
+	if(this->getPosX() >= other_object.getPosX() && this->getPosX() <= (other_object.getPosX() + other_object.getWidth())){
+		if(this->getPosY() >= other_object.getPosY() && this->getPosY() <= (other_object.getPosY() + other_object.getHeight())){
+			collided = true;
+		}
+	}else if(other_object.getPosX() >= this->getPosX() && other_object.getPosX() <= (this->getPosX() + this->getWidth())){
+		if(other_object.getPosY() >= this->getPosY() && other_object.getPosY() <= (this->getPosY() + this->getHeight())){
+			collided = true;
+		}
+	}
+
+	return collided;
+}
+
+bool ObjectBase::isDead(){
+	return this->is_dead;
+}
+
+void ObjectBase::die(){
+	this->is_dead = true;
+	this->is_visible = false;
+}
+
+void ObjectBase::alive(){
+	this->is_dead = false;
+	this->is_visible = true;
 }

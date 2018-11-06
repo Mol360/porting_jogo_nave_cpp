@@ -15,6 +15,7 @@ class ObjectBase{
 		int pos_y;
 		SDL_Rect dest;
 		bool is_visible;
+		bool is_dead;
 	public:
 		int getPosX();
 		int getPosY();
@@ -32,8 +33,12 @@ class ObjectBase{
 		void hide();
 		void show();
 		bool isVisible();
+		bool isDead();
+		void die();
+		void alive();
 		void update();
 		void draw();
 		void load();
+		bool collided(ObjectBase other_object);
 
 };
