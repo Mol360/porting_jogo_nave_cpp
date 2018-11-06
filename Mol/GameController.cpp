@@ -1,5 +1,8 @@
 #include "GameController.h"
 
+#include <string>
+#include <stdio.h>
+
 int GameController::window_width = 640;
 int GameController::window_height = 480;
 
@@ -25,6 +28,7 @@ void GameController::load(){
 	this->game_name = "Jogo Nave";
 	this->enemy_qtt_col = 10;
 	this->enemy_qtt_row = 4;
+	this->enemy_shoot_proximity = 50;
 
 	this->background_controller = BackgroundController();
 	this->background_controller.setScreen(this->screen);
@@ -42,14 +46,15 @@ void GameController::load(){
 	this->enemy.addEnemy(&this->player);
 
 	this->player.setPosX(300);
+	this->player.setPosY(440);
 
 	int off_set_top = 50;
 	int off_set_left = 50;
 
 	if(this->enemies.size() <= 0){
-		for (unsigned i=0; i<this->enemy_qtt_col; ++i){
+		for (int i=0; i<this->enemy_qtt_col; ++i){
 			std::vector<SpaceShip> n_enemy_vec;
-			for (unsigned b=0; b<this->enemy_qtt_row; ++b){
+			for (int b=0; b<this->enemy_qtt_row; ++b){
 				int n_pos_x = (off_set_left*(i+1))+10;
 				int n_pos_y = (off_set_top*(b)+1)+10;
 				if(i%2){
@@ -74,8 +79,8 @@ void GameController::load(){
 		}
 
 		if(this->enemies.size() > 0){
-			for (unsigned i=0; i<this->enemies.size(); ++i){
-				for (unsigned b=0; b<this->enemies[i].size(); ++b){
+			for (int i=0; i<this->enemies.size(); ++i){
+				for (int b=0; b<this->enemies[i].size(); ++b){
 					this->player.addEnemy(&this->enemies[i][b]);
 				}
 			}
@@ -92,8 +97,8 @@ void GameController::draw(){
 	this->enemy.draw();
 
 	if(this->enemies.size() > 0){
-		for (unsigned i=0; i<this->enemies.size(); ++i){
-			for (unsigned b=0; b<this->enemies[i].size(); ++b){
+		for (int i=0; i<this->enemies.size(); ++i){
+			for (int b=0; b<this->enemies[i].size(); ++b){
 				this->enemies[i][b].draw();
 			}
 		}
@@ -116,9 +121,24 @@ void GameController::update(){
 		this->enemy.shoot();
 
 		if(this->enemies.size() > 0){
-			for (unsigned i=0; i<this->enemies.size(); ++i){
-				for (unsigned b=0; b<this->enemies[i].size(); ++b){
+			for (int i=0; i<this->enemies.size(); ++i){
+				for (int b=0; b<this->enemies[i].size(); ++b){
 					this->enemies[i][b].update();
+				}
+			}
+
+			for (int i=0; i<this->enemies.size(); ++i){
+				int b = 0;
+				if( (this->player.getPosX() > (this->enemies[i][b].getPosX()-this->enemy_shoot_proximity) && this->player.getPosX() < (this->enemies[i][b].getPosX()+this->enemy_shoot_proximity)) 
+					||
+					(this->player.getPosX()+this->player.getWidth() > (this->enemies[i][b].getPosX()-this->enemy_shoot_proximity) && this->player.getPosX()+this->player.getWidth() < (this->enemies[i][b].getPosX()+this->enemy_shoot_proximity)) ){
+
+					for (int c = this->enemies[i].size(); c > 0; --c){
+						if(this->enemies[i][c-1].isDead() == false){
+							this->enemies[i][c-1].shoot();
+							break;
+						}
+					}
 				}
 			}
 		}

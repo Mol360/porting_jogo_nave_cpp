@@ -21,6 +21,7 @@ class GameController{
 		std::vector<std::vector<SpaceShip>> enemies;
 		int enemy_qtt_col;
 		int enemy_qtt_row;
+		int enemy_shoot_proximity;
 		string game_name;
 		BackgroundController background_controller;
 		SDL_Surface * screen;
