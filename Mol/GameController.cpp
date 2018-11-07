@@ -29,6 +29,9 @@ void GameController::load(){
 	this->enemy_qtt_col = 10;
 	this->enemy_qtt_row = 4;
 	this->enemy_shoot_proximity = 50;
+	this->enemy_speed_x = -2;
+	this->enemy_speed_y = 10;
+	this->enemy_moves_y = false;
 
 	this->background_controller = BackgroundController();
 	this->background_controller.setScreen(this->screen);
@@ -115,12 +118,73 @@ void GameController::update(){
 	this->draw();
 }
 
+void GameController::controlEnemiesMovement(){
+	if(this->enemies.size() > 0){
+		if(this->enemy_speed_x > 0){
+			for (int i=this->enemies.size(); i>0; --i){
+				bool can_break = false;
+				for (int b=this->enemies[i-1].size(); b>0; --b){
+					if(this->enemies[i-1][b-1].isDead() == false){
+						if(this->enemies[i-1][b-1].getPosX() >= (window_width-20-this->enemies[i-1][b-1].getWidth())){
+							this->enemy_speed_x = this->enemy_speed_x * -1;
+							if(this->enemies[i-1][b-1].getPosY() >= 300){
+								this->enemy_speed_y = this->enemy_speed_y * -1;
+							}else if(this->enemies[i-1][0].getPosY() <= 20){
+								this->enemy_speed_y = this->enemy_speed_y * -1;
+							}
+							this->enemy_moves_y = true;
+						}
+						can_break = true;
+						break;
+					}
+				}
+				if(can_break == true){
+					break;
+				}
+			}
+		}else{
+			for (int i=0; i<this->enemies.size(); ++i){
+				bool can_break = false;
+				for (int b=this->enemies[i-1].size(); b>0; --b){
+					if(this->enemies[i-1][b-1].isDead() == false){
+						if(this->enemies[i-1][b-1].getPosX()<=20){
+							this->enemy_speed_x = this->enemy_speed_x * -1;
+
+							if(this->enemies[i-1][b-1].getPosY() >= 300){
+								this->enemy_speed_y = this->enemy_speed_y * -1;
+							}else if(this->enemies[i-1][0].getPosY() <= 10){
+								this->enemy_speed_y = this->enemy_speed_y * -1;
+							}
+
+							this->enemy_moves_y = true;
+						}
+						can_break = true;
+						break;
+					}
+				}
+				if(can_break == true){
+					break;
+				}
+			}
+		}
+	}	
+}
+
 void GameController::enemiesUpdate(){
 	if(this->enemies.size() > 0){
+		this->controlEnemiesMovement();
 		for (int i=0; i<this->enemies.size(); ++i){
 			for (int b=0; b<this->enemies[i].size(); ++b){
+				this->enemies[i][b].moveX(this->enemy_speed_x);
+				if(this->enemy_moves_y == true){
+					this->enemies[i][b].moveY(this->enemy_speed_y);
+				}
 				this->enemies[i][b].update();
 			}
+		}
+
+		if(this->enemy_moves_y == true){
+			this->enemy_moves_y = false;
 		}
 
 		if(this->player.isDead() == false){

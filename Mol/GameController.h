@@ -22,6 +22,9 @@ class GameController{
 		int enemy_qtt_col;
 		int enemy_qtt_row;
 		int enemy_shoot_proximity;
+		int enemy_speed_x;
+		int enemy_speed_y;
+		bool enemy_moves_y;
 		string game_name;
 		BackgroundController background_controller;
 		SDL_Surface * screen;
@@ -30,6 +33,7 @@ class GameController{
 		ObjectBase tiro_t;
 		InputManager input;
 		void enemiesUpdate();
+		void controlEnemiesMovement();
 	protected:
 
 	public:
