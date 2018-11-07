@@ -38,13 +38,6 @@ void GameController::load(){
 	this->player.load();
 	this->player.setInputManager(&this->input);
 
-	this->enemy.setScreen(this->screen);
-	this->enemy.load();
-
-	this->player.addEnemy(&this->enemy);
-
-	this->enemy.addEnemy(&this->player);
-
 	this->player.setPosX(300);
 	this->player.setPosY(440);
 
@@ -94,8 +87,6 @@ void GameController::draw(){
 	this->background_controller.draw();
 	this->player.draw();
 
-	this->enemy.draw();
-
 	if(this->enemies.size() > 0){
 		for (int i=0; i<this->enemies.size(); ++i){
 			for (int b=0; b<this->enemies[i].size(); ++b){
@@ -117,16 +108,22 @@ void GameController::update(){
 	if(this->input.isPressClose() == false){
 		this->background_controller.update();
 		this->player.update();
-		this->enemy.update();
-		this->enemy.shoot();
 
-		if(this->enemies.size() > 0){
-			for (int i=0; i<this->enemies.size(); ++i){
-				for (int b=0; b<this->enemies[i].size(); ++b){
-					this->enemies[i][b].update();
-				}
+		this->enemiesUpdate();
+	}
+	
+	this->draw();
+}
+
+void GameController::enemiesUpdate(){
+	if(this->enemies.size() > 0){
+		for (int i=0; i<this->enemies.size(); ++i){
+			for (int b=0; b<this->enemies[i].size(); ++b){
+				this->enemies[i][b].update();
 			}
+		}
 
+		if(this->player.isDead() == false){
 			for (int i=0; i<this->enemies.size(); ++i){
 				int b = 0;
 				if( (this->player.getPosX() > (this->enemies[i][b].getPosX()-this->enemy_shoot_proximity) && this->player.getPosX() < (this->enemies[i][b].getPosX()+this->enemy_shoot_proximity)) 
@@ -143,8 +140,6 @@ void GameController::update(){
 			}
 		}
 	}
-	
-	this->draw();
 }
 
 SDL_Surface GameController::getScreen(){

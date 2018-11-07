@@ -29,6 +29,7 @@ class GameController{
 		EnemyShipRed enemy;
 		ObjectBase tiro_t;
 		InputManager input;
+		void enemiesUpdate();
 	protected:
 
 	public:
