@@ -2,6 +2,7 @@
 
 #include <string>
 #include <stdio.h>
+#include <chrono>
 
 int GameController::window_width = 640;
 int GameController::window_height = 480;
@@ -32,6 +33,8 @@ void GameController::load(){
 	this->enemy_speed_x = -2;
 	this->enemy_speed_y = 10;
 	this->enemy_moves_y = false;
+	this->enemy_movement_delay = 1000;
+	this->enemy_movement_timer = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
 	this->background_controller = BackgroundController();
 	this->background_controller.setScreen(this->screen);
@@ -173,18 +176,30 @@ void GameController::controlEnemiesMovement(){
 void GameController::enemiesUpdate(){
 	if(this->enemies.size() > 0){
 		this->controlEnemiesMovement();
+
+
+		Uint64 current_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		int time_diff = current_time - this->enemy_movement_timer;
+
 		for (int i=0; i<this->enemies.size(); ++i){
 			for (int b=0; b<this->enemies[i].size(); ++b){
-				this->enemies[i][b].moveX(this->enemy_speed_x);
-				if(this->enemy_moves_y == true){
-					this->enemies[i][b].moveY(this->enemy_speed_y);
+
+				if(time_diff >= this->enemy_movement_delay){
+					if(this->enemy_moves_y == true){
+						this->enemies[i][b].moveY(this->enemy_speed_y);
+					}else{
+						this->enemies[i][b].moveX(this->enemy_speed_x);
+					}
 				}
 				this->enemies[i][b].update();
 			}
 		}
 
-		if(this->enemy_moves_y == true){
-			this->enemy_moves_y = false;
+		if(time_diff >= this->enemy_movement_delay){
+			this->enemy_movement_timer = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+			if(this->enemy_moves_y == true){
+				this->enemy_moves_y = false;
+			}
 		}
 
 		if(this->player.isDead() == false){

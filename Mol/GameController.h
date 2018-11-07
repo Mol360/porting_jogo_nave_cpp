@@ -25,6 +25,8 @@ class GameController{
 		int enemy_speed_x;
 		int enemy_speed_y;
 		bool enemy_moves_y;
+		Uint64 enemy_movement_timer;
+		int enemy_movement_delay;
 		string game_name;
 		BackgroundController background_controller;
 		SDL_Surface * screen;
