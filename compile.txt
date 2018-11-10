@@ -1,2 +1,5 @@
 g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp -o game -lSDL -lSDL_image
 
+g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp -o game.exe -lmingw32 -lSDLmain -lSDL -lSDL_image -mwindows
+
+
