@@ -148,14 +148,14 @@ void GameController::controlEnemiesMovement(){
 		}else{
 			for (int i=0; i<this->enemies.size(); ++i){
 				bool can_break = false;
-				for (int b=this->enemies[i-1].size(); b>0; --b){
-					if(this->enemies[i-1][b-1].isDead() == false){
-						if(this->enemies[i-1][b-1].getPosX()<=20){
+				for (int b=this->enemies[i].size(); b>0; --b){
+					if(this->enemies[i][b-1].isDead() == false){
+						if(this->enemies[i][b-1].getPosX()<=20){
 							this->enemy_speed_x = this->enemy_speed_x * -1;
 
-							if(this->enemies[i-1][b-1].getPosY() >= 300){
+							if(this->enemies[i][b-1].getPosY() >= 300){
 								this->enemy_speed_y = this->enemy_speed_y * -1;
-							}else if(this->enemies[i-1][0].getPosY() <= 10){
+							}else if(this->enemies[i][0].getPosY() <= 10){
 								this->enemy_speed_y = this->enemy_speed_y * -1;
 							}
 

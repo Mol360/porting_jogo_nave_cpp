@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main(){
+int main( int argc, char *argv[] ){
 
 	cout << "Teste ::" << GameController::getWindowWidth() << "x" << GameController::getWindowHeight() << endl;
 
