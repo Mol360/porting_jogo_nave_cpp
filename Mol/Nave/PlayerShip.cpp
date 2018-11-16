@@ -60,7 +60,6 @@ void PlayerShip::controlMovement(){
 }
 
 int PlayerShip::gotShot(){
-        cout << "TESTE GOT SHOT!!" << endl;
         int r_life = SpaceShip::gotShot();
         this->hud_controller->lessOneLife();
         return r_life;

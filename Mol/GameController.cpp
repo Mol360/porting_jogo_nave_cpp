@@ -55,7 +55,7 @@ void GameController::load(){
 			std::vector<SpaceShip> n_enemy_vec;
 			for (int b=0; b<this->enemy_qtt_row; ++b){
 				int n_pos_x = (off_set_left*(i+1))+10;
-				int n_pos_y = (off_set_top*(b)+1)+10;
+				int n_pos_y = (off_set_top*(b)+1)+50;
 				if(i%2){
 					EnemyShipRed n_enemy = EnemyShipRed();
 					n_enemy.setScreen(this->screen);
@@ -143,7 +143,7 @@ void GameController::controlEnemiesMovement(){
 							this->enemy_speed_x = this->enemy_speed_x * -1;
 							if(this->enemies[i-1][b-1].getPosY() >= 300){
 								this->enemy_speed_y = this->enemy_speed_y * -1;
-							}else if(this->enemies[i-1][0].getPosY() <= 20){
+							}else if(this->enemies[i-1][0].getPosY() <= 50){
 								this->enemy_speed_y = this->enemy_speed_y * -1;
 							}
 							this->enemy_moves_y = true;
@@ -166,7 +166,7 @@ void GameController::controlEnemiesMovement(){
 
 							if(this->enemies[i][b-1].getPosY() >= 300){
 								this->enemy_speed_y = this->enemy_speed_y * -1;
-							}else if(this->enemies[i][0].getPosY() <= 10){
+							}else if(this->enemies[i][0].getPosY() <= 50){
 								this->enemy_speed_y = this->enemy_speed_y * -1;
 							}
 
