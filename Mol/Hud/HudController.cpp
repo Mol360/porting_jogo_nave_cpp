@@ -4,6 +4,7 @@
 using namespace std;
 
 void HudController::load(){
+	this->arr_life_bar.clear();
 	if(this->total_life > 0){
 		for(int i = 0; i < this->total_life/20; i++){
 			LifeBar n_lifebar = LifeBar();
@@ -44,8 +45,8 @@ void HudController::setTotalPlayerLife(int n_total_life){
 void HudController::lessOneLife(){
 	if(this->arr_life_bar.size() > 0){
 		for(int i = this->arr_life_bar.size(); i >= 0; --i){
-			if(this->arr_life_bar[i].isLifeBarOn() == true){
-				this->arr_life_bar[i].setLifeBarOff();
+			if(this->arr_life_bar[i-1].isLifeBarOn() == true){
+				this->arr_life_bar[i-1].setLifeBarOff();
 				break;
 			}
 		}

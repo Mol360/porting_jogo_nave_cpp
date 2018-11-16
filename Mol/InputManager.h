@@ -12,6 +12,7 @@ class InputManager{
 		bool is_down_press;
 		bool is_close_press;
 		bool is_spacebar_press;
+		bool is_enter_press;
 		SDL_Event event;
 	public:
 		std::string getCurrentEvent();
@@ -21,6 +22,7 @@ class InputManager{
 		bool isPressDown();
 		bool isPressClose();
 		bool isPressSpacebar();
+		bool isPressEnter();
 		void load();
 		void update();
 

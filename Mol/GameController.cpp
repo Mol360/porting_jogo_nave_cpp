@@ -40,6 +40,7 @@ void GameController::load(){
 	this->background_controller.setScreen(this->screen);
 	this->background_controller.load();
 
+	this->player = PlayerShip();
 	this->player.setScreen(this->screen);
 	this->player.load();
 	this->player.setInputManager(&this->input);
@@ -50,6 +51,7 @@ void GameController::load(){
 	int off_set_top = 50;
 	int off_set_left = 50;
 
+	this->enemies.clear();
 	if(this->enemies.size() <= 0){
 		for (int i=0; i<this->enemy_qtt_col; ++i){
 			std::vector<SpaceShip> n_enemy_vec;
@@ -119,17 +121,22 @@ void GameController::draw(){
 void GameController::update(){
 	SDL_WM_SetCaption(this->game_name.c_str(), NULL);
 	this->input.update();
+	if(this->input.isPressEnter() == true){
+		std::cout << "APERTOU ENTER" << std::endl;
+		this->load();
+	}else{
 
-	if(this->input.isPressClose() == false){
-		this->background_controller.update();
-		this->player.update();
+		if(this->input.isPressClose() == false){
+			this->background_controller.update();
+			this->player.update();
 
-		this->enemiesUpdate();
+			this->enemiesUpdate();
 
-		this->hud_controller.update();
+			this->hud_controller.update();
+		}
+
+		this->draw();
 	}
-	
-	this->draw();
 }
 
 void GameController::controlEnemiesMovement(){

@@ -27,6 +27,7 @@ void InputManager::load(){
 	is_down_press = false;
 	is_close_press = false;
   is_spacebar_press = false;
+  is_enter_press = false;
 }
 
 void InputManager::update(){
@@ -55,6 +56,9 @@ void InputManager::update(){
                   case SDLK_SPACE:
                     is_spacebar_press = true;
                     break;
+                  case SDLK_RETURN:
+                    is_enter_press = true;
+                    break;
     			        default:
                   				break;
           		}
@@ -79,6 +83,9 @@ void InputManager::update(){
                 case SDLK_SPACE:
                     is_spacebar_press = false;
                     break;
+                case SDLK_RETURN:
+                    is_enter_press = false;
+                    break;
 		           default:
               			break;
           		}
@@ -89,4 +96,8 @@ void InputManager::update(){
 
 bool InputManager::isPressClose(){
 	return is_close_press;
+}
+
+bool InputManager::isPressEnter(){
+  return is_enter_press;
 }
