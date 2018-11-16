@@ -58,3 +58,14 @@ void PlayerShip::controlMovement(){
 	this->moveX(velX);
         this->moveY(velY);
 }
+
+int PlayerShip::gotShot(){
+        cout << "TESTE GOT SHOT!!" << endl;
+        int r_life = SpaceShip::gotShot();
+        this->hud_controller->lessOneLife();
+        return r_life;
+}
+
+void PlayerShip::setHudController(HudController* n_hud_controller){
+        this->hud_controller = n_hud_controller;
+}

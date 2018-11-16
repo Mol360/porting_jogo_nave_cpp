@@ -32,7 +32,7 @@ class SpaceShip: public ObjectBase{
 		int getLife();
 		void setLife(int n_tot_life);
 		void setShotValue(int n_shot_value);
-		int gotShot();
+		virtual int gotShot();
 		void shoot();
 		void update();
 		void load();

@@ -9,6 +9,7 @@
 #include "Nave/EnemyShipBlue.h"
 #include "Nave/SpaceShip.h"
 #include "ObjectBase.h"
+#include "Hud/HudController.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -19,6 +20,7 @@ class GameController{
 		static int window_width;
 		static int window_height;
 		std::vector<std::vector<SpaceShip>> enemies;
+		HudController hud_controller;
 		int enemy_qtt_col;
 		int enemy_qtt_row;
 		int enemy_shoot_proximity;

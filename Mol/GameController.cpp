@@ -85,6 +85,13 @@ void GameController::load(){
 			}
 		}
 	}
+
+	this->hud_controller = HudController();
+	this->hud_controller.setScreen(this->screen);
+	this->hud_controller.setTotalPlayerLife(this->player.getLife());
+	this->hud_controller.load();
+
+	this->player.setHudController(&hud_controller);
 }
 
 void GameController::draw(){
@@ -101,6 +108,8 @@ void GameController::draw(){
 		}
 	}
 
+	this->hud_controller.draw();
+
 	SDL_UpdateRect(this->screen, 0,0,0,0); // Atualiza todo o screen
 	//SDL_Delay(10); // 16.6
 	int tempo_inicial = SDL_GetTicks();
@@ -116,6 +125,8 @@ void GameController::update(){
 		this->player.update();
 
 		this->enemiesUpdate();
+
+		this->hud_controller.update();
 	}
 	
 	this->draw();

@@ -7,3 +7,8 @@ void EnemyShipBlue::load(){
 	this->shot_value = 100;
 	this->delay_shoot_miliseconds = 2600;
 }
+
+int EnemyShipBlue::gotShot(){
+	int r_life = SpaceShip::gotShot();
+	return r_life;
+}

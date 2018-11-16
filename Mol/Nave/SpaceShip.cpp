@@ -27,6 +27,7 @@ int SpaceShip::gotShot(){
 	if(this->life <= 0){
 		this->die();
 	}
+	return this->life;
 }
 
 void SpaceShip::load(){

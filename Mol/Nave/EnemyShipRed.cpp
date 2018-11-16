@@ -8,3 +8,8 @@ void EnemyShipRed::load(){
 	this->bullet_vel = 5;
 	this->delay_shoot_miliseconds = 2300;
 }
+
+int EnemyShipRed::gotShot(){
+	int r_life = SpaceShip::gotShot();
+	return r_life;
+}

@@ -3,5 +3,6 @@
 
 class EnemyShipRed: public SpaceShip{
 	public:
-		void load();	
+		void load();
+		int gotShot();
 };
