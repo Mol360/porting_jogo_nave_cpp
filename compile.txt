@@ -1,5 +1,12 @@
-g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp -o game -lSDL -lSDL_image
+[ Linux Ubuntu ]
+- Install libs:
+	- apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
 
-g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp -o game.exe -lmingw32 -lSDLmain -lSDL -lSDL_image -mwindows
+- Compile:
+	- g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp Mol/Hud/*.cpp -o game -lSDL -lSDL_image
 
+
+[ Windows ]
+- Compile:
+	- g++ main.cpp Mol/*.cpp Mol/Nave/*.cpp -o game.exe -lmingw32 -lSDLmain -lSDL -lSDL_image -mwindows
 
